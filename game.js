@@ -1,6 +1,15 @@
 const canvas = document.querySelector('#game');
 const game = canvas.getContext('2d');
 
+//elemento de la vida
+const livesCount = document.querySelector('#lives');
+
+//Elemento del cronometro y record
+const timeCount = document.querySelector('#time');
+const records = document.querySelector('#record');
+const pResult = document.querySelector('#result');
+
+
 //addEventListener de los botones para el jugador (pantalla)
 const btnUp = document.querySelector('#up');
 const btnDown = document.querySelector('#down');
@@ -12,6 +21,15 @@ const playerPosition = {
     x: undefined,
     y: undefined,
 };
+
+//GIFT POSITION
+const giftPosition = {
+    x: undefined,
+    y: undefined,
+};
+
+//ENEMIES POSITIONS
+const enemiesPositions = [];
 
 btnUp.addEventListener('click', botonPresionado);
 btnDown.addEventListener('click', botonPresionado);
@@ -26,20 +44,36 @@ function botonPresionado() {
 window.addEventListener('keydown', function(event) {
     switch(event.key) {
         case "ArrowLeft":
-            playerPosition.x = playerPosition.x - elementsSize;
-            movePlayer();
+            if(playerPosition.x < elementsSize) {
+                console.log('OUT');
+            } else {
+                playerPosition.x = playerPosition.x - elementsSize;
+                startGame();
+            }
             break;
         case "ArrowRight":
-            playerPosition.x = playerPosition.x + elementsSize;
-            movePlayer();
+            if((playerPosition.x + elementsSize) > (canvasSize - elementsSize)) {
+                console.log('OUT');
+            } else {
+                playerPosition.x = playerPosition.x + elementsSize;
+                startGame();
+            }
             break;
         case "ArrowUp":
-            playerPosition.y = playerPosition.y - elementsSize;
-            movePlayer();
+            if((playerPosition.y - elementsSize) < elementsSize) {
+                console.log('OUT');
+            } else {
+                playerPosition.y = playerPosition.y - elementsSize;
+                startGame();
+            }
             break;
         case "ArrowDown":
-            playerPosition.y = playerPosition.y + elementsSize;
-            movePlayer();
+            if((playerPosition.y + elementsSize) > canvasSize) {
+                console.log('OUT');
+            } else {
+                playerPosition.y = playerPosition.y + elementsSize;
+                startGame();
+            }
             break;
         default:
     }
@@ -49,21 +83,58 @@ window.addEventListener('keydown', function(event) {
 
 let canvasSize;
 let elementsSize;
+let level = 0;
+let lives = 3;
 
+//variables para el cronometro
+let timeStart;
+let timePlayer;
+let timeInterval;
+
+//Resize Function
+function setCanvasSize() {
+
+    if(window.innerHeight > window.innerWidth) {
+        canvasSize = window.innerWidth * 0.70;
+    } else {
+        canvasSize = window.innerHeight * 0.70;
+    }
+
+    canvas.setAttribute('width', canvasSize);
+    canvas.setAttribute('height', canvasSize);
+
+    elementsSize = canvasSize / 10;
+
+    startGame();
+}
 //Render function
 function startGame() {
     game.font = `${elementsSize}px Verdana`;
     game.textAlign = 'start';
 
-    const map = maps[1];
+    const map = maps[level];
+
+    if(!map) {
+        gameWin();
+        return;
+    }
+
+    if(!timeStart) {
+        timeStart = Date.now();
+        timeInterval = setInterval(showTime, 10);
+        showRecord();
+    }
+
     const mapRows = map.trim().split('\n').map(row => row.trim());
     const mapRowsCols = mapRows.map(col => col.split(''));
 
-    // for(let row = 1; row <= 10; row++) {
-    //     for(let col = 0; col < 10; col++) {
-    //         game.fillText(emojis[mapRowsCols[row - 1][col]], col * elementsSize, row * elementsSize);
-    //     }
-    // }
+    //llamamos la funcion que inserta la cantidad de vidas sobrantes
+    showLives();
+
+    //eliminamos Todas las posiciones del array enemiesPositions
+    enemiesPositions.splice(0);
+    //Eliminamos todos los elementos del mapa antes de renderizarlos nuevamente
+    game.clearRect(0, 0, canvasSize, canvasSize);
 
     mapRowsCols.forEach((row, rowIndex) => {
         row.forEach((col, colIndex) => {
@@ -74,9 +145,18 @@ function startGame() {
 
             //Posicion del jugador
             if(col === 'O') {
-                console.log('aqui ira el jugador');
-                playerPosition.x = posX;
-                playerPosition.y = posY;
+                if(playerPosition.x === undefined && playerPosition.y === undefined) {
+                    playerPosition.x = posX;
+                    playerPosition.y = posY;
+                }
+            } else if(col === 'I') {
+                giftPosition.x = posX;
+                giftPosition.y = posY;
+            } else if(col === 'X') {
+                enemiesPositions.push({
+                    x: posX,
+                    y: posY,
+                });
             }
         });
     });
@@ -84,24 +164,83 @@ function startGame() {
     
 }
 
-//Resize Function
-function setCanvasSize() {
+function showLives() {
+    // const heartsArray = Array(lives).fill(emojis['HEART']);
+    // livesCount.innerText = '';
+    // heartsArray.forEach(heart => livesCount.append(heart));
+    livesCount.innerText = '💝'.repeat(lives);
+}
 
-    if(window.innerHeight > window.innerWidth) {
-        canvasSize = window.innerWidth * 0.75;
-    } else {
-        canvasSize = window.innerHeight * 0.75;
-    }
+function showTime () {
+    timeCount.innerText = Date.now() - timeStart;
+}
 
-    canvas.setAttribute('width', canvasSize);
-    canvas.setAttribute('height', canvasSize);
+function showRecord() {
+    records.innerText = localStorage.getItem('record_time');
+}
 
-    elementsSize = (canvasSize / 10) - 1;
-
+function levelWin() {
+    console.log('ganaste');
+    level++;
     startGame();
 }
 
+function gameWin() {
+    console.log('Terminaste el juego');
+    clearInterval(timeInterval);
+
+    const recordTime = localStorage.getItem('record_time');
+    const playerTime = Date.now() - timeStart;
+    if(recordTime) {
+        if(recordTime >= playerTime) {
+            localStorage.setItem('record_time', playerTime);
+            pResult.innerText = 'Superaste el record';
+        } else {
+            pResult.innerText = 'No superaste el record';
+        }
+    } else {
+        localStorage.setItem('record_time', playerTime);
+        pResult.innerText = 'Primera Vez?'
+    }
+    console.log({
+        recordTime,
+        playerTime
+    })
+}
+
+function levelFail() {
+    lives--;
+    
+    if(lives <= 0) {
+        level = 0;
+        lives = 3;
+        timeStart = undefined;
+    }
+
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
+    startGame();
+};
+
 function movePlayer() {
+    const giftCollitionX = giftPosition.x.toFixed(3) == playerPosition.x.toFixed(3);
+    const giftCollitionY = giftPosition.y.toFixed(3) == playerPosition.y.toFixed(3);
+    const giftCollition = giftCollitionX && giftCollitionY;
+
+    if(giftCollition) {
+        levelWin();
+    };
+    
+    const enemyCollition = enemiesPositions.find(enemy => {
+        const enemyCollitionX = enemy.x.toFixed(3) == playerPosition.x.toFixed(3);
+        const enemyCollitionY = enemy.y.toFixed(3) == playerPosition.y.toFixed(3);
+        return enemyCollitionX && enemyCollitionY;
+    });
+
+    if(enemyCollition) {
+        levelFail();
+    };
+
     game.fillText(emojis.PLAYER, playerPosition.x, playerPosition.y);
 }
 
