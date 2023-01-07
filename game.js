@@ -36,8 +36,47 @@ btnDown.addEventListener('click', botonPresionado);
 btnLeft.addEventListener('click', botonPresionado);
 btnRight.addEventListener('click', botonPresionado);
 
-function botonPresionado() {
-    console.log('se presiono el boton de pantalla')
+function botonPresionado(event) {
+    const flecha = event.path[0];
+    const btnValue = flecha.id;
+    const numPPX = Number((playerPosition.x).toFixed(3));
+    const numPPY = Number((playerPosition.y).toFixed(3));
+    const elemSizeNum = Number(elementsSize.toFixed(3));
+    switch (btnValue) {
+        case 'left':
+            if(numPPX < elemSizeNum) {
+                console.log('OUT');
+            } else {
+                playerPosition.x = numPPX - elemSizeNum;
+                startGame();
+            }
+            break;
+        case "right":
+            if((numPPX + elemSizeNum) > (canvasSize - elemSizeNum)) {
+                console.log('OUT');
+            } else {
+                playerPosition.x = numPPX + elemSizeNum;
+                startGame();
+            }
+            break;
+        case "up":
+            if(numPPY - elemSizeNum < elemSizeNum) {
+                console.log('OUT');
+            } else {
+                playerPosition.y = numPPY - elemSizeNum;
+                startGame();
+            }
+            break;
+        case "down":
+            if((numPPY + elemSizeNum) > canvasSize) {
+                console.log('OUT');
+            } else {
+                playerPosition.y = numPPY + elemSizeNum;
+                startGame();
+            }
+            break;
+        default:
+    }
 }
 //addEventListener de los botones para el jugador (teclado)
 window.addEventListener('keydown', function(event) {
