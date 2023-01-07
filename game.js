@@ -39,39 +39,41 @@ btnRight.addEventListener('click', botonPresionado);
 function botonPresionado() {
     console.log('se presiono el boton de pantalla')
 }
-
 //addEventListener de los botones para el jugador (teclado)
 window.addEventListener('keydown', function(event) {
+    const numPPX = Number((playerPosition.x).toFixed(3));
+    const numPPY = Number((playerPosition.y).toFixed(3));
+    const elemSizeNum = Number(elementsSize.toFixed(3));
     switch(event.key) {
         case "ArrowLeft":
-            if(playerPosition.x < elementsSize) {
+            if(numPPX < elemSizeNum) {
                 console.log('OUT');
             } else {
-                playerPosition.x = playerPosition.x - elementsSize;
+                playerPosition.x = numPPX - elemSizeNum;
                 startGame();
             }
             break;
         case "ArrowRight":
-            if((playerPosition.x + elementsSize) > (canvasSize - elementsSize)) {
+            if((numPPX + elemSizeNum) > (canvasSize - elemSizeNum)) {
                 console.log('OUT');
             } else {
-                playerPosition.x = playerPosition.x + elementsSize;
+                playerPosition.x = numPPX + elemSizeNum;
                 startGame();
             }
             break;
         case "ArrowUp":
-            if((playerPosition.y - elementsSize) < elementsSize) {
+            if(numPPY - elemSizeNum < elemSizeNum) {
                 console.log('OUT');
             } else {
-                playerPosition.y = playerPosition.y - elementsSize;
+                playerPosition.y = numPPY - elemSizeNum;
                 startGame();
             }
             break;
         case "ArrowDown":
-            if((playerPosition.y + elementsSize) > canvasSize) {
+            if((numPPY + elemSizeNum) > canvasSize) {
                 console.log('OUT');
             } else {
-                playerPosition.y = playerPosition.y + elementsSize;
+                playerPosition.y = numPPY + elemSizeNum;
                 startGame();
             }
             break;
@@ -103,13 +105,16 @@ function setCanvasSize() {
     canvas.setAttribute('width', canvasSize);
     canvas.setAttribute('height', canvasSize);
 
-    elementsSize = canvasSize / 10;
+    elementsSize = (canvasSize / 10) - 1;
+
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
 
     startGame();
 }
 //Render function
 function startGame() {
-    game.font = `${elementsSize}px Verdana`;
+    game.font = `${elementsSize}px Arial`;
     game.textAlign = 'start';
 
     const map = maps[level];
