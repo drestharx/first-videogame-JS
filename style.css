@@ -44,9 +44,9 @@ button:not(:last-child) {
 }
 
 .messages {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    place-items: center;
     width: 80%;
     max-width: 460px;
 }

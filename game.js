@@ -16,6 +16,9 @@ const btnDown = document.querySelector('#down');
 const btnLeft = document.querySelector('#left');
 const btnRight = document.querySelector('#right');
 
+//RESET BUTTON
+const resetBtn = document.querySelector('#reset_btn');
+
 //PLAYER POSITION
 const playerPosition = {
     x: undefined,
@@ -31,6 +34,7 @@ const giftPosition = {
 //ENEMIES POSITIONS
 const enemiesPositions = [];
 
+//addEventListener de los botones para el jugador (pantalla)
 btnUp.addEventListener('click', botonPresionado);
 btnDown.addEventListener('click', botonPresionado);
 btnLeft.addEventListener('click', botonPresionado);
@@ -120,7 +124,18 @@ window.addEventListener('keydown', function(event) {
     }
 })
 
-//con la constante game podemos acceder a los metodos en 2d para poder manipular el canvas
+resetBtn.addEventListener('click', resetGame);
+
+function resetGame() {
+
+    level = 0;
+    lives = 3;
+    timeStart = undefined;
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
+    pResult.innerText = '';
+    startGame();
+}
 
 let canvasSize;
 let elementsSize;
@@ -224,7 +239,6 @@ function showRecord() {
 }
 
 function levelWin() {
-    console.log('ganaste');
     level++;
     startGame();
 }
@@ -259,6 +273,7 @@ function levelFail() {
         level = 0;
         lives = 3;
         timeStart = undefined;
+        clearInterval(timeInterval);
     }
 
     playerPosition.x = undefined;
@@ -275,13 +290,18 @@ function movePlayer() {
         levelWin();
     };
     
+    let enemyCollitionX;
+    let enemyCollitionY;
+
     const enemyCollition = enemiesPositions.find(enemy => {
-        const enemyCollitionX = enemy.x.toFixed(3) == playerPosition.x.toFixed(3);
-        const enemyCollitionY = enemy.y.toFixed(3) == playerPosition.y.toFixed(3);
+        enemyCollitionX = enemy.x.toFixed(3) == playerPosition.x.toFixed(3);
+        enemyCollitionY = enemy.y.toFixed(3) == playerPosition.y.toFixed(3);
         return enemyCollitionX && enemyCollitionY;
     });
 
     if(enemyCollition) {
+        
+        
         levelFail();
     };
 
