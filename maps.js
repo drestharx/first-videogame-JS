@@ -5,11 +5,11 @@
 
 const emojis = {
     '-': ' ',
-    'O': '🚪',
+    'O': '🏤',
     'X': '💣',
     'I': '🎁',
-    'PLAYER': '💀',
-    'BOMB_COLLISION': '🔥',
+    'PLAYER': '🚁',
+    'BOMB_COLLISION': '💥',
     'GAME_OVER': '👎',
     'WIN': '🏆',
     'HEART': '💝',

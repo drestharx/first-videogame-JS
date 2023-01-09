@@ -141,6 +141,7 @@ let canvasSize;
 let elementsSize;
 let level = 0;
 let lives = 3;
+let map;
 
 //variables para el cronometro
 let timeStart;
@@ -171,7 +172,7 @@ function startGame() {
     game.font = `${elementsSize}px Arial`;
     game.textAlign = 'start';
 
-    const map = maps[level];
+    map = maps[level];
 
     if(!map) {
         gameWin();
@@ -278,7 +279,8 @@ function levelFail() {
 
     playerPosition.x = undefined;
     playerPosition.y = undefined;
-    startGame();
+
+    window.setTimeout(startGame, 300);
 };
 
 function movePlayer() {
@@ -300,8 +302,40 @@ function movePlayer() {
     });
 
     if(enemyCollition) {
+        //Debe introducirse las explosiones con la colision con el jugador
+
+        //Eliminamos todos los elementos del mapa antes de renderizarlos nuevamente
+        game.clearRect(0, 0, canvasSize, canvasSize);
+
+        //creamos una nueva array de strings para el render de los elementos
+        const mapRows2 = map.trim().split('\n').map(row => row.trim());
+        const mapRowsColsCollition = mapRows2.map(col => col.split(''));
+
+        //encontramos la posicion de la bomba con la que coliciono
+
+        const bombCollition = enemiesPositions.find(bomb => {
+            const bombNumberX = parseFloat(bomb.x.toFixed(2));
+            const bombNumberY = parseFloat(bomb.y.toFixed(2));
+            const playerX = parseFloat(playerPosition.x.toFixed(2));
+            const playerY = parseFloat(playerPosition.y.toFixed(2));
+            return bombNumberX === playerX && bombNumberY === playerY;
+        });
+
+        //necesito renderizar todo de nuevo para mostrar todas las bombas, con excepcion de la bomba collicionada
+
+        mapRowsColsCollition.forEach((row, rowIndex) => {
+            row.forEach((col, colIndex) => {
+                let emoji = emojis[col];
+                const posX = elementsSize * colIndex;
+                const posY = elementsSize * (rowIndex + 1);
+                if(posX === bombCollition.x && posY == bombCollition.y) {
+                    emoji = emojis['BOMB_COLLISION'];
+                }
+                game.fillText(emoji, posX, posY);
+            });
+        });
         
-        
+
         levelFail();
     };
 
