@@ -1,14 +1,13 @@
 const canvas = document.querySelector('#game');
 const game = canvas.getContext('2d');
 
-//elemento de la vida
+//elemento de los puntos de vida
 const livesCount = document.querySelector('#lives');
 
 //Elemento del cronometro y record
 const timeCount = document.querySelector('#time');
 const records = document.querySelector('#record');
 const pResult = document.querySelector('#result');
-
 
 //addEventListener de los botones para el jugador (pantalla)
 const btnUp = document.querySelector('#up');
@@ -18,6 +17,10 @@ const btnRight = document.querySelector('#right');
 
 //RESET BUTTON
 const resetBtn = document.querySelector('#reset_btn');
+
+//START GAME BUTTON
+const startBtn = document.querySelector('.start-game');
+const divStart = document.querySelector('.start-container');
 
 //PLAYER POSITION
 const playerPosition = {
@@ -124,10 +127,10 @@ window.addEventListener('keydown', function(event) {
     }
 })
 
+//Funcion y boton de Reseteo del juego
 resetBtn.addEventListener('click', resetGame);
 
 function resetGame() {
-
     level = 0;
     lives = 3;
     timeStart = undefined;
@@ -271,10 +274,7 @@ function levelFail() {
     lives--;
     
     if(lives <= 0) {
-        level = 0;
-        lives = 3;
-        timeStart = undefined;
-        clearInterval(timeInterval);
+        gameOver();
     }
 
     playerPosition.x = undefined;
@@ -282,6 +282,15 @@ function levelFail() {
 
     window.setTimeout(startGame, 300);
 };
+
+//funcion GameOver
+function gameOver() {
+    level = 0;
+    lives = 3;
+    timeStart = undefined;
+    clearInterval(timeInterval);
+}
+
 
 function movePlayer() {
     const giftCollitionX = giftPosition.x.toFixed(3) == playerPosition.x.toFixed(3);
@@ -341,6 +350,15 @@ function movePlayer() {
 
     game.fillText(emojis.PLAYER, playerPosition.x, playerPosition.y);
 }
+
+//funcion y addEventlistener de Inicio del juego
+function inicioJuego() {
+    clearInterval(timeInterval);
+    divStart.classList.add('inactive');
+    timeStart = undefined;
+    startGame();
+}
+startBtn.addEventListener('click', inicioJuego);
 
 window.addEventListener('load', setCanvasSize);
 window.addEventListener('resize', setCanvasSize);
