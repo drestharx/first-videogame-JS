@@ -56,8 +56,7 @@ btnLeft.addEventListener('click', botonPresionado);
 btnRight.addEventListener('click', botonPresionado);
 
 function botonPresionado(event) {
-    const flecha = event.path[0];
-    const btnValue = flecha.id;
+    const btnValue = event.srcElement.id;
     const numPPX = Number((playerPosition.x).toFixed(3));
     const numPPY = Number((playerPosition.y).toFixed(3));
     const elemSizeNum = Number(elementsSize.toFixed(3));
