@@ -18,6 +18,9 @@ const btnRight = document.querySelector('#right');
 //RESET BUTTON
 const resetBtn = document.querySelector('#reset_btn');
 
+//RESET GAME BUTTON
+const resetBtnGameOver = document.getElementById('game-over_button');
+
 //START GAME BUTTON
 const startBtn = document.querySelector('.start-game');
 const divStart = document.querySelector('.start-container');
@@ -129,16 +132,6 @@ window.addEventListener('keydown', function(event) {
 
 //Funcion y boton de Reseteo del juego
 resetBtn.addEventListener('click', resetGame);
-
-function resetGame() {
-    level = 0;
-    lives = 3;
-    timeStart = undefined;
-    playerPosition.x = undefined;
-    playerPosition.y = undefined;
-    pResult.innerText = '';
-    startGame();
-}
 
 let canvasSize;
 let elementsSize;
@@ -283,14 +276,30 @@ function levelFail() {
     window.setTimeout(startGame, 300);
 };
 
+//reset game function
+function resetGame() {
+    gameOverSection.classList.add('inactive');
+    clearInterval(timeInterval);
+    level = 0;
+    lives = 3;
+    timeStart = undefined;
+    playerPosition.x = undefined;
+    playerPosition.y = undefined;
+    pResult.innerText = '';
+    startGame();
+}
+
+//restart game function
+const gameOverSection = document.getElementById('gameOver-section');
+
 //funcion GameOver
 function gameOver() {
     level = 0;
     lives = 3;
     timeStart = undefined;
     clearInterval(timeInterval);
+    gameOverSection.classList.toggle('inactive');
 }
-
 
 function movePlayer() {
     const giftCollitionX = giftPosition.x.toFixed(3) == playerPosition.x.toFixed(3);
@@ -358,7 +367,10 @@ function inicioJuego() {
     timeStart = undefined;
     startGame();
 }
+
+//Add event listener start y game over
 startBtn.addEventListener('click', inicioJuego);
+resetBtnGameOver.addEventListener('click', resetGame);
 
 window.addEventListener('load', setCanvasSize);
 window.addEventListener('resize', setCanvasSize);
