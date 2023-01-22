@@ -18,8 +18,17 @@ const btnRight = document.querySelector('#right');
 //RESET BUTTON
 const resetBtn = document.querySelector('#reset_btn');
 
+//game over section
+const gameOverSection = document.getElementById('gameOver-section');
+
+//game win section
+const gameWinSection = document.getElementById('gameWin-section');
+
 //RESET GAME BUTTON
 const resetBtnGameOver = document.getElementById('game-over_button');
+
+//GAME WIN BUTTON
+const gameWinButton = document.getElementById('gameWinButton');
 
 //START GAME BUTTON
 const startBtn = document.querySelector('.start-game');
@@ -244,6 +253,8 @@ function gameWin() {
     console.log('Terminaste el juego');
     clearInterval(timeInterval);
 
+    gameWinSection.classList.remove('inactive');
+
     const recordTime = localStorage.getItem('record_time');
     const playerTime = Date.now() - timeStart;
     if(recordTime) {
@@ -279,6 +290,7 @@ function levelFail() {
 //reset game function
 function resetGame() {
     gameOverSection.classList.add('inactive');
+    gameWinSection.classList.add('inactive');
     clearInterval(timeInterval);
     level = 0;
     lives = 3;
@@ -289,8 +301,6 @@ function resetGame() {
     startGame();
 }
 
-//restart game function
-const gameOverSection = document.getElementById('gameOver-section');
 
 //funcion GameOver
 function gameOver() {
@@ -368,9 +378,10 @@ function inicioJuego() {
     startGame();
 }
 
-//Add event listener start y game over
+//Add event listener start, game over and game win
 startBtn.addEventListener('click', inicioJuego);
 resetBtnGameOver.addEventListener('click', resetGame);
+gameWinButton.addEventListener('click', resetGame);
 
 window.addEventListener('load', setCanvasSize);
 window.addEventListener('resize', setCanvasSize);
