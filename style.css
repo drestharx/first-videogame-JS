@@ -111,6 +111,7 @@ p {
     left: 0;
     display: grid;
     place-content: center;
+    color: black;
 }
 
 .game-over_title {
@@ -126,6 +127,7 @@ p {
     left: 0;
     display: grid;
     place-content: center;
+    color: black;
 }
 
 .game-win__title {

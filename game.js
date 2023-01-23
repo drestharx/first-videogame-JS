@@ -256,16 +256,25 @@ function gameWin() {
 
     const recordTime = localStorage.getItem('record_time');
     const playerTime = Date.now() - timeStart;
+    const pGameWinTime = document.getElementById('gameWinTime');
+    const pGameWinRecord = document.getElementById('gameWinRecord');
+    const pGameWinMessage = document.getElementById('gameWinMsg');
+
+    pGameWinTime.innerText = playerTime;
+
     if(recordTime) {
         if(recordTime >= playerTime) {
             localStorage.setItem('record_time', playerTime);
-            pResult.innerText = 'Superaste el record';
+            pGameWinRecord.innerText = localStorage.getItem('record_time');
+            pGameWinMessage.innerText = 'Superaste el record';
         } else {
-            pResult.innerText = 'No superaste el record';
+            pGameWinRecord.innerText = localStorage.getItem('record_time');
+            pGameWinMessage.innerText = 'No superaste el record';
         }
     } else {
         localStorage.setItem('record_time', playerTime);
-        pResult.innerText = 'Primera Vez?'
+        pGameWinRecord.innerText = localStorage.getItem('record_time');
+        pGameWinMessage.innerText = 'Primera Vez?'
     }
     console.log({
         recordTime,
@@ -300,11 +309,30 @@ function resetGame() {
     startGame();
 }
 
-
 //funcion GameOver
 function gameOver() {
     level = 0;
     lives = 3;
+
+    const gameOverTime = document.getElementById('gameOverTime');
+    const gameOverRecord = document.getElementById('gameOverRecord');
+    const gameOverMesagge = document.getElementById('gameOverMsg');
+    const recordTime = localStorage.getItem('record_time');
+
+    console.log('timeStart', timeStart);
+    console.log('Cronometro', Date.now() - timeStart);
+
+    gameOverTime.innerText = `${Date.now() - timeStart}`;
+
+    if(!recordTime) {
+        localStorage.setItem('record-time', timeStart);
+        gameOverMesagge.innerText = 'Aun no tienes un record';
+    } else {
+        gameOverRecord.innerText = recordTime;
+        gameOverMesagge.innerText = 'Aun puedes superar tu record';
+    }
+
+
     timeStart = undefined;
     clearInterval(timeInterval);
     gameOverSection.classList.toggle('inactive');

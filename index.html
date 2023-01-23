@@ -33,23 +33,31 @@
     <div class="start-container">
         <div class="start-card">
             <section>
-                <h1 class="title">LABERINTO</h1>
+                <h1 class="title">JUEGO DEL LABERINTO</h1>
+                <h1 class="title">PREPARATE PARA SUPERAR TU TIEMPO</h1>
                 <ol class="rules">
                     <li>Tienes 3 vidas.</li>
-                    <li>En cada colision perderas una vida</li>
+                    <li>En cada colision perderas una vida.</li>
                     <li>Al perder las 3, se reiniciara el juego.</li>
                 </ol>
-                <p>¡Animate a mejorar tu tiempo!</p>
+                <p>¡DIVIERTETE!</p>
             </section>
             <button class="start-game">INICIAR</button>
         </div>
     </div>
     <div class="game-over__container inactive" id="gameOver-section">
         <h3 class="game-over_title">GAME OVER</h3>
+        <p>Intentalo de nuevo</p>
+        <p>Tiempo 🕛: <span id="gameOverTime"></span></p>
+        <p>Record 🏆: <span id="gameOverRecord"></span></p>
+        <p id="gameOverMsg"></p>
         <button id="game-over_button">RESTART</button>
     </div>
     <div class="game-win__container inactive" id="gameWin-section">
         <h2 class="game-win__title">¡TERMINASTE EL JUEGO!</h2>
+        <p>Tiempo 🕛: <span id="gameWinTime"></span></p>
+        <p>Record 🏆: <span id="gameWinRecord"></span></p>
+        <p id="gameWinMsg"></p>
         <button class="game-win_button" id="gameWinButton">Reiniciar</button>
     </div>
 

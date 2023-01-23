@@ -5,10 +5,10 @@
 
 const emojis = {
     '-': ' ',
-    'O': '🏤',
-    'X': '💣',
-    'I': '🎁',
-    'PLAYER': '🚁',
+    'O': '🌕',
+    'X': '🛸',
+    'I': '🌎',
+    'PLAYER': '👾',
     'BOMB_COLLISION': '💥',
     'GAME_OVER': '👎',
     'WIN': '🏆',
@@ -40,15 +40,15 @@ maps.push(`
     XXXX---IXX
     XXXXXXXXXX
     `);
-// maps.push(`
-//     I-----XXXX
-//     XXXXX-XXXX
-//     XX----XXXX
-//     XX-XXXXXXX
-//     XX-----XXX
-//     XXXXXX-XXX
-//     XX-----XXX
-//     XX-XXXXXXX
-//     XX-----OXX
-//     XXXXXXXXXX
-// `);
+maps.push(`
+    I-----XXXX
+    XXXXX-XXXX
+    XX----XXXX
+    XX-XXXXXXX
+    XX-----XXX
+    XXXXXX-XXX
+    XX-----XXX
+    XX-XXXXXXX
+    XX-----OXX
+    XXXXXXXXXX
+`);
