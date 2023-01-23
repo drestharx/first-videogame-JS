@@ -11,7 +11,7 @@ html {
 }
 
 body {
-    background-image: linear-gradient(10deg, #20dbd8 0, #20a8d8 25%, #14698d 50%, #123349 75%, #120913 100%);
+    background-image: linear-gradient(0deg, #3f8986 0, #285868 25%, #1b3b44 50%, #0c1f29 75%, #000f16 100%);
     color: #fff;
     margin: 0;
     padding: 0;
@@ -25,52 +25,99 @@ body {
 .game-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 5px;
     height: 100%;
     width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 #game {
-    border: 4px solid #ff6600;
+    border: 8px inset #d1ede7;
     border-radius: 8px;
-    background-color: #feff9d;
+    background-image: url('./assets/espacio-exterior.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.btns {
+/* BUTTONS STYLES */
+
+.btns-container {
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    margin: 0 auto;
-    width: 100%;
+    gap: 5px;
+    width: 60%;
+    min-width: 355px;
+    max-width: 655px;
+    height: 10%;
 }
 
-button {
-    background-color: #fdef05;
-    border-radius: 8px;
-    border-color: #ff6600;
-    margin: 0;
-    padding: 5px 20px;
-    width: 100px;
+.btn {
+    width: 25%;
+    height: 100%;
+    background-image: url('./assets/flecha-correcta.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-button:not(:last-child) {
-    margin-right: 10px;
+.btn_up {
+    transform: rotate(-90deg);
 }
+
+.btn_left {
+    transform: rotate(180deg);
+}
+
+.btn_down {
+    transform: rotate(90deg);
+}
+
+/* MESSAGES STYLES */
 
 .messages {
     display: grid;
     grid-template-columns: 3fr 2fr;
+    column-gap: 20px;
     place-items: center;
-    width: 80%;
-    max-width: 460px;
+    width: 75%;
+    max-width: 340px;
+    height: 10%;
 }
 
-p {
-    display: block;
-    margin: 0;
+.messages .text-container {
     width: 100%;
+    height: 100%;
 }
+
+.text-container > p {
+    font-size: 1.4rem;
+    font-weight: lighter;
+    letter-spacing: 1.5px;
+    text-align: start;
+}
+
+.messages .rstBtn-container {
+    width: 100%;
+    height: 100%;
+}
+
+.messages .rstBtn-container #reset_btn {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    border-radius: 16px;
+    border: 2px white solid;
+    text-align: center;
+    padding: 15px;
+    font-size: 1.6rem;
+    letter-spacing: 1.5px;
+}
+
 
 /* REGLAS START SECTION */
 
@@ -83,7 +130,10 @@ p {
     left: 0;
     display: grid;
     place-content: center;
-    background-image: linear-gradient(10deg, #bafffb 0%, #59cad4 33%, #0092b3 66%, #0069a1 100%);
+    background-image: url('./assets/espacio-exterior.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .start-card {
@@ -96,7 +146,7 @@ p {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(10deg, #20dbd8 0, #14698d 50%, #120913 100%);
+    background-image: linear-gradient(0deg, #7a4260 0%, #56334e 25%, #3a273d 50%, #271e30 75%, #191726 100%);
 }
 
 .start-card section {
@@ -170,13 +220,5 @@ p {
 }
 
 @media (max-width: 440px) {
-    button {
-        margin-top: 5px;
-    }
 
-    #up,
-    #down {
-        margin-left: 100%;
-        margin-right: 100%;
-    }
 }

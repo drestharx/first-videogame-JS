@@ -7,7 +7,6 @@ const livesCount = document.querySelector('#lives');
 //Elemento del cronometro y record
 const timeCount = document.querySelector('#time');
 const records = document.querySelector('#record');
-const pResult = document.querySelector('#result');
 
 //addEventListener de los botones para el jugador (pantalla)
 const btnUp = document.querySelector('#up');
@@ -156,9 +155,9 @@ let timeInterval;
 function setCanvasSize() {
 
     if(window.innerHeight > window.innerWidth) {
-        canvasSize = window.innerWidth * 0.70;
+        canvasSize = window.innerWidth * 0.80;
     } else {
-        canvasSize = window.innerHeight * 0.70;
+        canvasSize = window.innerHeight * 0.80;
     }
 
     canvas.setAttribute('width', canvasSize);
@@ -185,7 +184,7 @@ function startGame() {
 
     if(!timeStart) {
         timeStart = Date.now();
-        timeInterval = setInterval(showTime, 10);
+        timeInterval = setInterval(showTime, 50);
         showRecord();
     }
 
@@ -305,7 +304,6 @@ function resetGame() {
     timeStart = undefined;
     playerPosition.x = undefined;
     playerPosition.y = undefined;
-    pResult.innerText = '';
     startGame();
 }
 

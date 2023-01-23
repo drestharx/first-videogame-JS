@@ -8,31 +8,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
-    <title>First Laberinth</title>
+    <title>Laberinth</title>
 </head>
 <body>
     <div class="game-container">
         <canvas id="game"></canvas>
         
-        <div class="btns">
-            <button id="up">🔼</button>
-            <button id="left">◀</button>
-            <button id="right">▶</button>
-            <button id="down">🔽</button>
+        <div class="btns-container">
+            <span id="up" class="btn btn_up"></span>
+            <span id="left" class="btn btn_left"></span>
+            <span id="right" class="btn btn_right"></span>
+            <span id="down" class="btn btn_down"></span>
         </div>
     
         <div class="messages">
-            <div>
+            <div class="text-container">
                 <p>Vidas: <span id="lives"></span></p>
                 <p>Tiempo 🕛: <span id="time"></span></p>
                 <p>Record: <span id="record"></span></p>
-                <p id="result"></p>
             </div>
-            <div>
-                <button id="reset_btn">Reset Game</button>
+            <div class="rstBtn-container">
+                <span id="reset_btn">RESTART</span>
             </div>
         </div>
     </div>
+
     <div class="start-container">
         <div class="start-card">
             <section>
@@ -48,6 +48,7 @@
             <button class="start-game">INICIAR</button>
         </div>
     </div>
+
     <div class="game-over__container inactive" id="gameOver-section">
         <h3 class="game-over_title">GAME OVER</h3>
         <p>Intentalo de nuevo</p>
@@ -56,6 +57,7 @@
         <p id="gameOverMsg"></p>
         <button id="game-over_button">RESTART</button>
     </div>
+
     <div class="game-win__container inactive" id="gameWin-section">
         <h2 class="game-win__title">¡TERMINASTE EL JUEGO!</h2>
         <p>Tiempo 🕛: <span id="gameWinTime"></span></p>
