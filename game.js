@@ -96,7 +96,7 @@ function botonPresionado(event) {
     }
 }
 //addEventListener de los botones para el jugador (teclado)
-window.addEventListener('keyup', function(event) {
+window.addEventListener('keydown', function(event) {
     const numPPX = Number((playerPosition.x).toFixed(3));
     const numPPY = Number((playerPosition.y).toFixed(3));
     const elemSizeNum = Number(elementsSize.toFixed(3));
