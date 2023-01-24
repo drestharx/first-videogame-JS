@@ -36,34 +36,40 @@
     <div class="start-container">
         <div class="start-card">
             <section>
-                <h1 class="title1"><i>JUEGO DE OBSTACULOS</i></h1>
-                <h2 class="title2"><i>PREPARATE PARA SUPERAR TU TIEMPO</i></h2>
+                <h1 class="title1"><i>LLEGA A LA TIERRA</i></h1>
+                <h2 class="title2"><i>SUPERA TU TIEMPO</i></h2>
                 <ol class="rules">
                     <li>Tienes 3 vidas.</li>
                     <li>En cada colision perderas una vida.</li>
-                    <li>Al perder las 3, se reiniciara el juego.</li>
+                    <li>Al perder las 3, GAME OVER.</li>
                 </ol>
                 <p>¡DIVIERTETE!</p>
             </section>
-            <button class="start-game">INICIAR</button>
+            <div>
+                <button class="start-game">INICIAR</button>
+            </div>
         </div>
     </div>
 
     <div class="game-over__container inactive" id="gameOver-section">
-        <h3 class="game-over_title">GAME OVER</h3>
+        <h3 class="game-over_title"><i>GAME OVER</i></h3>
         <p>Intentalo de nuevo</p>
         <p>Tiempo 🕛: <span id="gameOverTime"></span></p>
         <p>Record 🏆: <span id="gameOverRecord"></span></p>
         <p id="gameOverMsg"></p>
-        <button id="game-over_button">RESTART</button>
+        <div>
+            <button id="game-over_button">RESTART</button>
+        </div>
     </div>
 
     <div class="game-win__container inactive" id="gameWin-section">
-        <h2 class="game-win__title">¡TERMINASTE EL JUEGO!</h2>
+        <h2 class="game-win__title">¡LLEGASTE A LA TIERRA!</h2>
         <p>Tiempo 🕛: <span id="gameWinTime"></span></p>
         <p>Record 🏆: <span id="gameWinRecord"></span></p>
         <p id="gameWinMsg"></p>
-        <button class="game-win_button" id="gameWinButton">Reiniciar</button>
+        <div>
+            <button class="game-win_button" id="gameWinButton">REINICIAR</button>
+        </div>
     </div>
 
     <script src="./maps.js"></script>

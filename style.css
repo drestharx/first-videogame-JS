@@ -124,7 +124,6 @@ body {
 .start-container {
     width: 100%;
     height: 100%;
-    font-size: 2.4rem;
     position: absolute;
     top: 0;
     left: 0;
@@ -140,11 +139,12 @@ body {
     min-width: 280px;
     width: 90vw;
     height: 90vh;
-    border: #0e4459 solid 2px;
+    border: #C780FA inset 10px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
+    gap: 10px;
     align-items: center;
     background-image: linear-gradient(0deg, #7a4260 0%, #56334e 25%, #3a273d 50%, #271e30 75%, #191726 100%);
 }
@@ -152,68 +152,162 @@ body {
 .start-card section {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+    gap: 8px;
     padding: 5px;
     text-align: center;
 }
 
 .start-card .title1 {
-    -webkit-text-stroke: 0.1rem white;
+    font-size: 3rem;
+    letter-spacing: 4px;
+    color: white;
+}
+
+.start-card .title2 {
+    -webkit-text-stroke: 0.01rem white;
+    font-size: 2rem;
     color: transparent;
     letter-spacing: 10px;
 }
 
-.start-card .title2 {
-
-    letter-spacing: 4px;
-    font-size: 2.2rem;
-}
-
 .start-card section p {
     text-align: center;
+    font-size: 1.8rem;
 }
 
 .start-card section .rules li {
     list-style: none;
     margin: 12px 0px;
+    font-size: 1.6rem;
+    font-weight: 300;
+}
+
+.start-card div {
+    width: 100px;
+    height: 100px;
+    border: 4px groove white;
+    border-radius: 50%;
 }
 
 .start-card .start-game {
-    padding: 20px;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: 0;
+    font: inherit;
+    font-size: 1.6rem;
+    color: white;
+    overflow: visible;
+    cursor: pointer;
+    line-height: normal;
 }
+
+/* REGLAS GAME OVER */
 
 .game-over__container {
     width: 100%;
     height: 100%;
-    background-color: #fff;
     position: absolute;
     top: 0;
     left: 0;
-    display: grid;
-    place-content: center;
-    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    color: white;
+    background-image: linear-gradient(0deg, #DA1212 0%, #11468F 20%,  #041562 100%);
 }
 
 .game-over_title {
-    color: black;
+    font-size: 4.5rem;
+    letter-spacing: 4px;
 }
+
+.game-over__container > p {
+    font-size: 1.8rem;
+}
+
+.game-over__container div {
+    width: 100px;
+    height: 100px;
+    border: 4px groove white;
+    border-radius: 50%;
+}
+
+#game-over_button {
+    width: 100%;
+    height: 100%;
+    background: none;
+    border: 0;
+    font: inherit;
+    font-size: 1.6rem;
+    color: white;
+    overflow: visible;
+    cursor: pointer;
+    line-height: normal;
+}
+
+/* REGLAS GAME WIN */
 
 .game-win__container {
     width: 100%;
     height: 100%;
-    background-color: #fff;
     position: absolute;
     top: 0;
     left: 0;
-    display: grid;
-    place-content: center;
-    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    color: white;
+    background-image: url('./assets/planeta-tierra.jpg');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: top;
 }
 
 .game-win__title {
-    color: black;
+    font-size: 4.5rem;
+    letter-spacing: 4px;
+    text-align: center;
 }
+
+.game-win__container > p {
+    font-size: 1.8rem;
+}
+
+#gameWinMsg {
+    font-size: 2.4rem;
+}
+
+.game-win__container div {
+    width: 120px;
+    height: 120px;
+    border: 4px outset #990000;
+    border-radius: 50%;
+    background-color:#E14D2A;
+}
+
+#gameWinButton {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    font: inherit;
+    background: none;
+    font-size: 1.6rem;
+    font-weight: bolder;
+    color: white;
+    overflow: visible;
+    cursor: pointer;
+    line-height: normal;
+    letter-spacing: 1.5px;
+}
+
+/* REGLA SCREEN SHOW */
 
 .inactive {
     display: none;
